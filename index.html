@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brightline Dental — Modern Family &amp; Cosmetic Dentistry</title>
+<meta name="description" content="Same-day appointments, gentle care, and a free smile consultation. Book your visit with Brightline Dental today.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#16241F',
+          teal: { 50:'#EAF3F0', 100:'#D2E5DF', 300:'#7CAFA3', 500:'#1C7A6C', 600:'#145F54', 700:'#0F4C44', 900:'#0A2E29' },
+          gold: { 300:'#E9C683', 400:'#D6A24C', 500:'#BC8836', 600:'#9C6F2B' },
+          cream: { 50:'#FDFBF7', 100:'#FAF7F1', 200:'#F2ECE0' },
+        },
+        fontFamily: {
+          serif: ['Fraunces','Georgia','serif'],
+          sans: ['Inter','-apple-system','sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  * { -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Inter', sans-serif; background-color: #FAF7F1; color: #16241F; }
+  h1,h2,h3,.font-serif { font-family: 'Fraunces', Georgia, serif; }
+  .tracking-tight-lg { letter-spacing: -0.03em; }
+  .leading-relaxed-body { line-height: 1.7; }
+
+  .noise {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+  }
+
+  .shadow-soft { box-shadow: 0 1px 2px rgba(15,76,68,0.06), 0 8px 24px -8px rgba(15,76,68,0.18); }
+  .shadow-card { box-shadow: 0 1px 2px rgba(22,36,31,0.04), 0 12px 32px -12px rgba(22,36,31,0.10); }
+  .shadow-float { box-shadow: 0 4px 12px rgba(15,76,68,0.10), 0 24px 48px -20px rgba(15,76,68,0.30); }
+
+  @keyframes fadeUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+  .animate-fadeUp { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fadeUp { animation: none; }
+    * { transition-duration: 0.01ms !important; }
+  }
+
+  .btn-primary {
+    background-color: #D6A24C;
+    color: #0A2E29;
+    transition: transform 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms ease, box-shadow 200ms ease;
+  }
+  .btn-primary:hover { background-color: #E9C683; transform: translateY(-2px); }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
+  .btn-primary:focus-visible { outline: 3px solid #0F4C44; outline-offset: 2px; }
+
+  .btn-ghost { transition: transform 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms ease, border-color 200ms ease; }
+  .btn-ghost:hover { background-color: rgba(255,255,255,0.08); }
+  .btn-ghost:focus-visible { outline: 3px solid #D6A24C; outline-offset: 2px; }
+
+  .field {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .field:focus { border-color: #1C7A6C; box-shadow: 0 0 0 4px rgba(28,122,108,0.12); outline: none; }
+
+  .card-hover { transition: transform 220ms cubic-bezier(0.16,1,0.3,1), box-shadow 220ms ease; }
+  .card-hover:hover { transform: translateY(-4px); }
+
+  .img-overlay {
+    background: linear-gradient(to top, rgba(10,46,41,0.55), rgba(10,46,41,0.05));
+  }
+
+  .step-line { background: linear-gradient(180deg, #D2E5DF, transparent); }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="sticky top-0 z-50 bg-cream-50/90 backdrop-blur-md border-b border-teal-100">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5 group min-w-0">
+      <span class="w-9 h-9 rounded-full bg-teal-700 flex items-center justify-center shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2ECE0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-2.5 0-4 1.6-5 3-1.3 1.8-1 4-.6 6.4.3 2 .6 4.6 1.4 6.6.5 1.3 1.1 2 1.9 2 1.1 0 1.3-1.6 1.5-3.2.2-1.5.4-3 1-3s.8 1.5 1 3c.2 1.6.4 3.2 1.5 3.2.8 0 1.4-.7 1.9-2 .8-2 1.1-4.6 1.4-6.6.4-2.4.7-4.6-.6-6.4-1-1.4-2.5-3-5-3z"/></svg>
+      </span>
+      <span class="font-serif text-base sm:text-lg text-teal-900 tracking-tight truncate">Brightline <span class="text-teal-500 hidden sm:inline">Dental</span></span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/70">
+      <a href="#services" class="hover:text-teal-700 transition-colors duration-200">Services</a>
+      <a href="#journey" class="hover:text-teal-700 transition-colors duration-200">How it works</a>
+      <a href="#reviews" class="hover:text-teal-700 transition-colors duration-200">Reviews</a>
+    </div>
+    <a href="#lead-form" class="btn-primary inline-flex items-center gap-2 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold cursor-pointer whitespace-nowrap shrink-0">
+      <span class="sm:hidden">Book Now</span>
+      <span class="hidden sm:inline">Book Free Consult</span>
+    </a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="top" class="relative overflow-hidden bg-teal-900">
+  <div class="absolute inset-0" style="background:
+      radial-gradient(circle at 15% 20%, rgba(28,122,108,0.55), transparent 55%),
+      radial-gradient(circle at 85% 75%, rgba(214,162,76,0.18), transparent 50%),
+      linear-gradient(160deg, #0F4C44 0%, #0A2E29 60%, #081F1B 100%);"></div>
+  <svg class="noise" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+  <div class="relative max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+    <div class="animate-fadeUp">
+      <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-gold-300 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+        Rated 4.9/5 by 500+ patients
+      </span>
+      <h1 class="tracking-tight-lg text-4xl md:text-[3.25rem] leading-[1.1] text-cream-50 mt-6">
+        A healthier smile starts with <span class="text-gold-300 italic">one</span> free visit.
+      </h1>
+      <p class="leading-relaxed-body text-base md:text-lg text-cream-100/70 mt-5 max-w-md">
+        Same-day appointments, gentle modern care, and a team that actually explains what's going on. Claim your free consultation before spots fill up.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 mt-8">
+        <a href="#lead-form" class="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold cursor-pointer">
+          Claim My Free Consultation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+15551234567" class="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-cream-50 border border-white/20 cursor-pointer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (555) 123-4567
+        </a>
+      </div>
+    </div>
+
+    <div class="relative animate-fadeUp" style="animation-delay:120ms">
+      <div class="relative rounded-3xl overflow-hidden shadow-float border border-white/10">
+        <img src="https://placehold.co/640x560/0F4C44/EAF3F0?text=Patient+Photo" alt="Smiling patient in dental chair" class="w-full h-full object-cover">
+        <div class="absolute inset-0 img-overlay"></div>
+      </div>
+      <div class="absolute -bottom-6 -left-6 bg-cream-50 rounded-2xl shadow-float px-5 py-4 hidden sm:flex items-center gap-3 max-w-[230px]">
+        <div class="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center shrink-0">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink leading-tight">Same-day slots</p>
+          <p class="text-xs text-ink/55 leading-tight">Usually open this week</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRUST BAR
+============================================================ -->
+<section class="bg-cream-100 border-b border-teal-100">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-3 text-xs font-semibold tracking-[0.1em] uppercase text-ink/45">
+    <span>500+ Smiles Treated</span>
+    <span class="hidden sm:inline">·</span>
+    <span>Same-Day Appointments</span>
+    <span class="hidden sm:inline">·</span>
+    <span>Most Insurance Accepted</span>
+    <span class="hidden sm:inline">·</span>
+    <span>15+ Years in Practice</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section id="services" class="bg-cream-50 py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6 md:px-10">
+    <div class="max-w-xl">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-gold-600">What we treat</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Care built around <em class="text-teal-600 not-italic font-medium">your</em> mouth, not a checklist.</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5 mt-12">
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-2.5 0-4 1.6-5 3-1.3 1.8-1 4-.6 6.4.3 2 .6 4.6 1.4 6.6.5 1.3 1.1 2 1.9 2 1.1 0 1.3-1.6 1.5-3.2.2-1.5.4-3 1-3s.8 1.5 1 3c.2 1.6.4 3.2 1.5 3.2.8 0 1.4-.7 1.9-2 .8-2 1.1-4.6 1.4-6.6.4-2.4.7-4.6-.6-6.4-1-1.4-2.5-3-5-3z"/></svg>
+        </div>
+        <h3 class="font-semibold text-ink mb-1.5">Cosmetic Dentistry</h3>
+        <p class="text-sm text-ink/55 leading-relaxed-body">Veneers, bonding, and whitening for a smile that matches how you feel.</p>
+      </div>
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-semibold text-ink mb-1.5">Family &amp; General</h3>
+        <p class="text-sm text-ink/55 leading-relaxed-body">Cleanings, checkups, and fillings for every age, from toddlers to grandparents.</p>
+      </div>
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        </div>
+        <h3 class="font-semibold text-ink mb-1.5">Emergency Care</h3>
+        <p class="text-sm text-ink/55 leading-relaxed-body">Sudden pain or a broken tooth? We hold same-day slots for emergencies.</p>
+      </div>
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="font-semibold text-ink mb-1.5">Implants &amp; Crowns</h3>
+        <p class="text-sm text-ink/55 leading-relaxed-body">Permanent, natural-looking restorations backed by digital scanning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEAD MAGNET / FORM  (GHL embed preview)
+============================================================ -->
+<section id="lead-form" class="relative overflow-hidden bg-teal-900 py-20 md:py-28">
+  <div class="absolute inset-0" style="background:
+      radial-gradient(circle at 80% 10%, rgba(214,162,76,0.18), transparent 50%),
+      radial-gradient(circle at 10% 90%, rgba(28,122,108,0.5), transparent 55%),
+      linear-gradient(160deg, #0F4C44 0%, #0A2E29 70%);"></div>
+  <svg class="noise" xmlns="http://www.w3.org/2000/svg"><filter id="n2"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n2)"/></svg>
+
+  <div class="relative max-w-5xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-gold-300">Limited this month</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-cream-50 mt-3">Claim your free smile consultation.</h2>
+      <p class="leading-relaxed-body text-cream-100/70 mt-4 max-w-md">
+        A full exam, digital X-rays, and a personalised care plan — on us. Normally a $150 value. Spots are limited to 12 new patients per month.
+      </p>
+      <ul class="mt-6 space-y-3">
+        <li class="flex items-start gap-2.5 text-sm text-cream-100/80">
+          <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6A24C" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          No-pressure consultation, no obligation
+        </li>
+        <li class="flex items-start gap-2.5 text-sm text-cream-100/80">
+          <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6A24C" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Confirmation within minutes
+        </li>
+        <li class="flex items-start gap-2.5 text-sm text-cream-100/80">
+          <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6A24C" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          We respect your inbox — no spam, ever
+        </li>
+      </ul>
+    </div>
+
+    <!--
+      GHL EMBED SLOT — when this goes live for a real client, delete the
+      <form id="leadForm"> block below and replace it with the client's
+      GoHighLevel form/iframe embed snippet:
+
+      <div class="ghl-embed">
+        <iframe src="https://api.leadconnectorhq.com/widget/form/FORM_ID"
+                style="width:100%;height:600px;border:none;border-radius:16px;"></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
+
+      Until then, this is a fully working preview form (client-side only)
+      so the demo can be clicked through end-to-end.
+    -->
+    <div class="bg-cream-50 rounded-2xl shadow-float p-7 md:p-8">
+      <form id="leadForm" class="space-y-4" novalidate>
+        <div>
+          <label for="name" class="block text-xs font-semibold text-ink/70 mb-1.5">Full name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required
+                 class="field w-full rounded-xl border border-teal-100 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/35"
+                 placeholder="Jordan Lee">
+          <p class="hidden text-xs text-red-600 mt-1" data-error-for="name">Please enter your name.</p>
+        </div>
+        <div>
+          <label for="phone" class="block text-xs font-semibold text-ink/70 mb-1.5">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required
+                 class="field w-full rounded-xl border border-teal-100 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/35"
+                 placeholder="(555) 123-4567">
+          <p class="hidden text-xs text-red-600 mt-1" data-error-for="phone">Please enter a valid phone number.</p>
+        </div>
+        <div>
+          <label for="email" class="block text-xs font-semibold text-ink/70 mb-1.5">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required
+                 class="field w-full rounded-xl border border-teal-100 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/35"
+                 placeholder="jordan@email.com">
+          <p class="hidden text-xs text-red-600 mt-1" data-error-for="email">Please enter a valid email.</p>
+        </div>
+        <button type="submit" id="leadSubmit"
+                class="btn-primary w-full rounded-xl px-6 py-3.5 text-sm font-semibold cursor-pointer inline-flex items-center justify-center gap-2">
+          <span id="leadSubmitLabel">Claim My Free Consultation</span>
+        </button>
+        <p class="text-[11px] text-ink/40 text-center leading-relaxed-body">
+          By submitting, you agree to be contacted about your appointment. This is a demo form — no data leaves your browser.
+        </p>
+      </form>
+
+      <div id="leadSuccess" class="hidden text-center py-6">
+        <div class="w-14 h-14 rounded-full bg-teal-50 flex items-center justify-center mx-auto mb-4">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F4C44" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-ink mb-1.5">You're all set!</h3>
+        <p class="text-sm text-ink/55 leading-relaxed-body max-w-xs mx-auto">We'll text and email you within a few minutes to confirm your free consultation time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7-STEP-STYLE JOURNEY → "What happens after you submit"
+============================================================ -->
+<section id="journey" class="bg-cream-100 py-20 md:py-28">
+  <div class="max-w-3xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-lg mx-auto">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-gold-600">What happens next</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">From form to first visit.</h2>
+    </div>
+
+    <div class="mt-14">
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-gold-400 text-teal-900 flex items-center justify-center text-sm font-bold shrink-0">1</div>
+          <div class="step-line w-px flex-1 mt-2"></div>
+        </div>
+        <div class="pb-10">
+          <p class="font-semibold text-ink">You submit the form</p>
+          <p class="text-sm text-ink/55 mt-1 leading-relaxed-body">Takes under a minute — just your name, phone, and email.</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-white border border-teal-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">2</div>
+          <div class="step-line w-px flex-1 mt-2"></div>
+        </div>
+        <div class="pb-10">
+          <p class="font-semibold text-ink">Our team confirms a time</p>
+          <p class="text-sm text-ink/55 mt-1 leading-relaxed-body">A real person calls or texts within minutes during office hours.</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-white border border-teal-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">3</div>
+        </div>
+        <div>
+          <p class="font-semibold text-ink">You come in for your free exam</p>
+          <p class="text-sm text-ink/55 mt-1 leading-relaxed-body">Full exam, digital X-rays, and a plan tailored to your smile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+============================================================ -->
+<section id="reviews" class="bg-cream-50 py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-lg mx-auto">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-gold-600">Patients say it best</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Real visits, real results.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mt-12">
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="flex gap-0.5 mb-3">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+        </div>
+        <p class="text-sm text-ink/70 leading-relaxed-body">"I used to dread the dentist. Brightline actually explains things and the same-day booking saved me when I broke a tooth on a Sunday."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <img src="https://placehold.co/40x40/D2E5DF/0F4C44?text=M" alt="" class="w-9 h-9 rounded-full object-cover">
+          <div>
+            <p class="text-sm font-semibold text-ink">Maria T.</p>
+            <p class="text-xs text-ink/45">Verified patient</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="flex gap-0.5 mb-3">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+        </div>
+        <p class="text-sm text-ink/70 leading-relaxed-body">"The free consult wasn't a sales pitch — they actually mapped out a 3-step plan and let me decide. Booked my cleaning the same week."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <img src="https://placehold.co/40x40/D2E5DF/0F4C44?text=J" alt="" class="w-9 h-9 rounded-full object-cover">
+          <div>
+            <p class="text-sm font-semibold text-ink">James O.</p>
+            <p class="text-xs text-ink/45">Verified patient</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl border border-teal-100 shadow-card p-6">
+        <div class="flex gap-0.5 mb-3">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#D6A24C"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
+        </div>
+        <p class="text-sm text-ink/70 leading-relaxed-body">"Took my kids in for their first cleanings. Staff was patient and gentle — both kids actually asked when we're going back."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <img src="https://placehold.co/40x40/D2E5DF/0F4C44?text=A" alt="" class="w-9 h-9 rounded-full object-cover">
+          <div>
+            <p class="text-sm font-semibold text-ink">Aisha K.</p>
+            <p class="text-xs text-ink/45">Verified patient</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="bg-teal-900 py-12">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2ECE0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-2.5 0-4 1.6-5 3-1.3 1.8-1 4-.6 6.4.3 2 .6 4.6 1.4 6.6.5 1.3 1.1 2 1.9 2 1.1 0 1.3-1.6 1.5-3.2.2-1.5.4-3 1-3s.8 1.5 1 3c.2 1.6.4 3.2 1.5 3.2.8 0 1.4-.7 1.9-2 .8-2 1.1-4.6 1.4-6.6.4-2.4.7-4.6-.6-6.4-1-1.4-2.5-3-5-3z"/></svg>
+      </span>
+      <span class="font-serif text-base text-cream-50">Brightline Dental</span>
+    </div>
+    <p class="text-xs text-cream-100/40 text-center">
+      Demo landing page built by <span class="text-cream-100/70 font-medium">Boost Connect</span> — your web agency for pages that convert.
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const form = document.getElementById('leadForm');
+    const success = document.getElementById('leadSuccess');
+    const submitBtn = document.getElementById('leadSubmit');
+    const submitLabel = document.getElementById('leadSubmitLabel');
+
+    const validators = {
+      name: v => v.trim().length > 1,
+      phone: v => /^[0-9()\-\s+]{7,}$/.test(v.trim()),
+      email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valid = true;
+      Object.keys(validators).forEach(function (field) {
+        const input = form.elements[field];
+        const errorEl = form.querySelector('[data-error-for="' + field + '"]');
+        const ok = validators[field](input.value);
+        input.classList.toggle('border-red-400', !ok);
+        if (errorEl) errorEl.classList.toggle('hidden', ok);
+        if (!ok) valid = false;
+      });
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+      submitLabel.textContent = 'Submitting…';
+
+      setTimeout(function () {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      }, 900);
+    });
+  })();
+</script>
+
+</body>
+</html>
