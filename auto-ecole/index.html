@@ -15,7 +15,7 @@
       extend: {
         colors: {
           ink: '#121826',
-          navy: { 50:'#EAF0F7', 100:'#D3E0EE', 300:'#7C97B8', 500:'#2B4C73', 600:'#1F3A5C', 700:'#16293F', 900:'#0B1726' },
+          navy: { 50:'#EAF0F7', 100:'#D3E0EE', 300:'#7C97B8', 500:'#2B4C73', 600:'#1F3A5C', 700:'#16293F', 800:'#101D2E', 900:'#0B1726' },
           amber: { 300:'#F2C66D', 400:'#E8A93D', 500:'#CC8E28', 600:'#A8741F' },
           cream: { 50:'#FBFAF6', 100:'#F6F3EC', 200:'#EDE8DB' },
         },
@@ -38,6 +38,7 @@
   h1,h2,h3,.font-display { font-family: '"Space Grotesk"', -apple-system, sans-serif; }
   .tracking-tight-lg { letter-spacing: -0.03em; }
   .leading-relaxed-body { line-height: 1.7; }
+  .tabular { font-variant-numeric: tabular-nums; }
 
   .noise { position: absolute; inset: 0; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay; }
 
@@ -47,6 +48,18 @@
 
   @keyframes fadeUp { from { opacity:0; transform: translateY(14px) scale(0.99); } to { opacity:1; transform: translateY(0) scale(1); } }
   .animate-fadeUp { animation: fadeUp 700ms var(--ease-out) both; }
+
+  /* ===== ROAD-LINE MOTIF (visual signature for this page) ===== */
+  .road-divider {
+    height: 3px;
+    background-image: repeating-linear-gradient(90deg, #E8A93D 0 22px, transparent 22px 46px);
+    opacity: 0.55;
+  }
+  .road-divider.dark { background-image: repeating-linear-gradient(90deg, rgba(246,243,236,0.4) 0 22px, transparent 22px 46px); }
+  .asphalt-bg {
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 34px);
+  }
 
   header { transition: box-shadow 250ms ease, background-color 250ms ease; }
   header.is-scrolled { box-shadow: 0 1px 2px rgba(11,23,38,0.05), 0 10px 28px -16px rgba(11,23,38,0.24); background-color: rgba(251,250,246,0.97); }
@@ -61,6 +74,13 @@
   .btn-primary:focus-visible { outline: 3px solid #16293F; outline-offset: 2px; }
   .btn-primary svg { transition: transform 200ms var(--ease-out); }
   .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-outline {
+    border: 1.5px solid #1F3A5C; color: #16293F;
+    transition: transform 160ms var(--ease-out), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  .btn-outline:hover { background-color: #16293F; color: #F6F3EC; transform: translateY(-1px); }
+  .btn-outline:active { transform: translateY(0) scale(0.97); transition-duration: 100ms; }
 
   .btn-ghost { transition: transform 160ms var(--ease-out), background-color 200ms ease, border-color 200ms ease; }
   .btn-ghost:hover { background-color: rgba(255,255,255,0.08); transform: translateY(-1px); }
@@ -90,6 +110,7 @@
 
   .img-overlay { background: linear-gradient(to top, rgba(11,23,38,0.55), rgba(11,23,38,0.05)); }
 
+  /* ===== SCROLL REVEAL ===== */
   .js .reveal-group > * {
     opacity: 0;
     transform: translateY(16px);
@@ -102,6 +123,24 @@
   .js .reveal-group.in-view > *:nth-child(4) { transition-delay: 210ms; }
   .js .reveal-group.in-view > *:nth-child(5) { transition-delay: 280ms; }
 
+  /* ===== STAT COUNTERS (hero) ===== */
+  .stat-number { font-variant-numeric: tabular-nums; }
+
+  /* ===== FORMATIONS — numbered rows (not cards) ===== */
+  .formation-row { transition: background-color 220ms ease; }
+  .formation-row:hover { background-color: rgba(232,169,61,0.07); }
+  .formation-num { transition: color 220ms ease; }
+  .formation-row:hover .formation-num { color: #E8A93D; }
+  .formation-arrow { transition: transform 220ms var(--ease-out), opacity 220ms ease; opacity: 0; transform: translateX(-6px); }
+  .formation-row:hover .formation-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ===== PRICING ===== */
+  .price-card { transition: transform 260ms var(--ease-out), box-shadow 260ms ease, border-color 260ms ease; }
+  .price-card:hover { transform: translateY(-5px); }
+  .price-card.is-featured { transform: scale(1.03); }
+  .price-card.is-featured:hover { transform: scale(1.03) translateY(-5px); }
+
+  /* ===== JOURNEY (dark band) ===== */
   .step-dot {
     transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease, transform 320ms var(--ease-out), box-shadow 320ms ease;
   }
@@ -110,18 +149,27 @@
     color: #121826;
     border-color: transparent;
     transform: scale(1.14);
-    box-shadow: 0 6px 16px -4px rgba(232,169,61,0.55);
+    box-shadow: 0 6px 16px -4px rgba(232,169,61,0.6);
   }
   .journey-step .step-title { transition: color 280ms ease; }
-  .journey-step.is-active .step-title { color: #A8741F; }
-  .journey-step .step-desc { transition: opacity 280ms ease; opacity: 0.85; }
+  .journey-step.is-active .step-title { color: #F2C66D; }
+  .journey-step .step-desc { transition: opacity 280ms ease; opacity: 0.75; }
   .journey-step.is-active .step-desc { opacity: 1; }
   #journeyFill { transform: scaleY(0); transform-origin: top; transition: transform 450ms var(--ease-in-out); }
 
-  .trust-bar > span:not(:last-child) { position: relative; }
-  @media (min-width: 640px) {
-    .trust-bar > span:not(:last-child)::after { content: "·"; position: absolute; top: 0; right: -1.6rem; }
+  /* ===== FAQ ACCORDION ===== */
+  .faq-trigger { cursor: pointer; }
+  .faq-chevron { transition: transform 280ms var(--ease-out); }
+  .faq-item.is-open .faq-chevron { transform: rotate(180deg); }
+  .faq-panel {
+    display: grid;
+    grid-template-rows: minmax(0, 0fr);
+    overflow: hidden;
+    transition: grid-template-rows 360ms var(--ease-in-out);
   }
+  .faq-panel > div { overflow: hidden; min-height: 0; }
+  .faq-item.is-open .faq-panel { grid-template-rows: minmax(0, 1fr); }
+  .faq-item.is-open .faq-trigger span { color: #16293F; }
 
   @media (prefers-reduced-motion: reduce) {
     .animate-fadeUp { animation: none !important; }
@@ -129,7 +177,7 @@
     .step-dot { transition: background-color 200ms ease, color 200ms ease !important; transform: none !important; }
     .journey-step.is-active .step-dot { transform: none !important; }
     #journeyFill { transition: none !important; }
-    .card-hover:hover, .btn-primary:hover, .btn-primary:active, .btn-ghost:hover, .btn-ghost:active { transform: none !important; }
+    .card-hover:hover, .btn-primary:hover, .btn-primary:active, .btn-ghost:hover, .btn-ghost:active, .price-card:hover, .formation-row .formation-arrow { transform: none !important; }
     .field-shake { animation: none !important; }
   }
 </style>
@@ -150,8 +198,8 @@
     </a>
     <div class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/70">
       <a href="#formations" class="hover:text-navy-700 transition-colors duration-200">Formations</a>
-      <a href="#journey" class="hover:text-navy-700 transition-colors duration-200">Comment ça marche</a>
-      <a href="#reviews" class="hover:text-navy-700 transition-colors duration-200">Avis</a>
+      <a href="#tarifs" class="hover:text-navy-700 transition-colors duration-200">Tarifs</a>
+      <a href="#faq" class="hover:text-navy-700 transition-colors duration-200">FAQ</a>
     </div>
     <a href="#lead-form" class="btn-primary inline-flex items-center gap-2 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold cursor-pointer whitespace-nowrap shrink-0">
       <span class="sm:hidden">S'inscrire</span>
@@ -161,16 +209,16 @@
 </header>
 
 <!-- ============================================================
-     HERO
+     HERO + EMBEDDED STAT DOCK
 ============================================================ -->
 <section id="top" class="relative overflow-hidden bg-navy-900">
   <div class="absolute inset-0" style="background:
-      radial-gradient(circle at 15% 20%, rgba(43,76,115,0.55), transparent 55%),
-      radial-gradient(circle at 85% 75%, rgba(232,169,61,0.16), transparent 50%),
+      radial-gradient(circle at 15% 15%, rgba(43,76,115,0.5), transparent 55%),
       linear-gradient(160deg, #16293F 0%, #0B1726 60%, #070F1A 100%);"></div>
+  <div class="absolute inset-0 asphalt-bg"></div>
   <svg class="noise" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
 
-  <div class="relative max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+  <div class="relative max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-12 md:pt-24 grid md:grid-cols-2 gap-12 items-center">
     <div class="animate-fadeUp">
       <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-amber-300 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
@@ -200,20 +248,34 @@
 
     <div class="relative animate-fadeUp" style="animation-delay:120ms">
       <div class="relative rounded-3xl overflow-hidden shadow-float border border-white/10">
-        <img src="https://placehold.co/640x560/16293F/F6F3EC?text=Photo+%C3%89l%C3%A8ve" alt="Élève au volant avec son moniteur" class="w-full h-full object-cover">
+        <img src="https://placehold.co/640x520/16293F/F6F3EC?text=Photo+%C3%89l%C3%A8ve" alt="Élève au volant avec son moniteur" class="w-full h-full object-cover">
         <div class="absolute inset-0 img-overlay"></div>
-      </div>
-      <div class="absolute -bottom-6 -left-6 bg-cream-50 rounded-2xl shadow-float px-5 py-4 hidden sm:flex items-center gap-3 max-w-[230px]">
-        <div class="w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center shrink-0">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-ink leading-tight">Places limitées</p>
-          <p class="text-xs text-ink/55 leading-tight">Session du mois en cours</p>
-        </div>
       </div>
     </div>
   </div>
+
+  <!-- Stat dock: replaces the generic "trust bar" pattern with animated counters -->
+  <div class="relative max-w-5xl mx-auto px-6 md:px-10 pb-10 md:pb-14">
+    <div class="reveal-group grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+      <div class="bg-navy-800/60 px-5 py-6 text-center">
+        <p class="stat-number tabular font-display text-3xl md:text-4xl font-semibold text-amber-300" data-count="300" data-suffix="+">0</p>
+        <p class="text-xs text-cream-100/55 mt-1.5 tracking-wide uppercase">Permis obtenus</p>
+      </div>
+      <div class="bg-navy-800/60 px-5 py-6 text-center">
+        <p class="stat-number tabular font-display text-3xl md:text-4xl font-semibold text-amber-300" data-count="92" data-suffix="%">0</p>
+        <p class="text-xs text-cream-100/55 mt-1.5 tracking-wide uppercase">Taux de réussite</p>
+      </div>
+      <div class="bg-navy-800/60 px-5 py-6 text-center">
+        <p class="stat-number tabular font-display text-3xl md:text-4xl font-semibold text-amber-300" data-count="30" data-suffix="j">0</p>
+        <p class="text-xs text-cream-100/55 mt-1.5 tracking-wide uppercase">Permis en moyenne</p>
+      </div>
+      <div class="bg-navy-800/60 px-5 py-6 text-center">
+        <p class="stat-number tabular font-display text-3xl md:text-4xl font-semibold text-amber-300" data-count="15" data-suffix="+">0</p>
+        <p class="text-xs text-cream-100/55 mt-1.5 tracking-wide uppercase">Moniteurs agréés</p>
+      </div>
+    </div>
+  </div>
+  <div class="road-divider dark"></div>
 </section>
 
 <!-- ============================================================
@@ -222,8 +284,8 @@
 <section id="lead-form" class="relative overflow-hidden bg-navy-900 py-20 md:py-28">
   <div class="absolute inset-0" style="background:
       radial-gradient(circle at 80% 10%, rgba(232,169,61,0.16), transparent 50%),
-      radial-gradient(circle at 10% 90%, rgba(43,76,115,0.5), transparent 55%),
       linear-gradient(160deg, #16293F 0%, #0B1726 70%);"></div>
+  <div class="absolute inset-0 asphalt-bg"></div>
   <svg class="noise" xmlns="http://www.w3.org/2000/svg"><filter id="n2"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n2)"/></svg>
 
   <div class="relative max-w-5xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-10 items-center">
@@ -307,101 +369,145 @@
 </section>
 
 <!-- ============================================================
-     TRUST BAR
-============================================================ -->
-<section class="bg-cream-100 border-b border-navy-100">
-  <div class="reveal-group trust-bar max-w-6xl mx-auto px-6 md:px-10 py-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-3 text-xs font-semibold tracking-[0.1em] uppercase text-ink/45">
-    <span>300+ Permis Obtenus</span>
-    <span>Taux de Réussite 92%</span>
-    <span>Véhicules Récents</span>
-    <span>Moniteurs Agréés</span>
-  </div>
-</section>
-
-<!-- ============================================================
-     FORMATIONS
+     FORMATIONS — numbered rows, not icon cards
 ============================================================ -->
 <section id="formations" class="bg-cream-50 py-20 md:py-28">
-  <div class="max-w-6xl mx-auto px-6 md:px-10">
+  <div class="max-w-4xl mx-auto px-6 md:px-10">
     <div class="max-w-xl">
       <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-600">Nos Formations</span>
-      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Un parcours pensé pour <em class="text-navy-600 not-italic font-medium">votre</em> rythme, pas pour les délais de l'auto-école.</h2>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Un parcours pensé pour <em class="text-navy-600 not-italic font-medium">votre</em> rythme.</h2>
     </div>
 
-    <div class="reveal-group grid sm:grid-cols-2 md:grid-cols-4 gap-5 mt-12">
-      <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="w-11 h-11 rounded-xl bg-navy-50 flex items-center justify-center mb-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2v-2.5a1 1 0 0 1 .2-.6l2.1-2.8A2 2 0 0 1 7 8h10a2 2 0 0 1 1.7 1l2.1 2.9a1 1 0 0 1 .2.6V15a2 2 0 0 1-2 2M7 17a2 2 0 1 0 4 0M13 17a2 2 0 1 0 4 0M5 11h14"/></svg>
+    <div class="reveal-group divide-y divide-navy-100 mt-10 border-t border-navy-100">
+      <a href="#lead-form" class="formation-row flex items-center gap-5 sm:gap-8 py-7 -mx-4 px-4 rounded-xl cursor-pointer">
+        <span class="formation-num font-display text-3xl sm:text-5xl font-semibold text-navy-100 leading-none shrink-0 w-12 sm:w-16">01</span>
+        <div class="flex-1">
+          <h3 class="font-semibold text-base sm:text-lg text-ink mb-1">Permis B (Voiture)</h3>
+          <p class="text-sm text-ink/55 leading-relaxed-body max-w-md">Formation complète code + conduite, avec véhicule récent et moniteur agréé.</p>
         </div>
-        <h3 class="font-semibold text-ink mb-1.5">Permis B (Voiture)</h3>
-        <p class="text-sm text-ink/55 leading-relaxed-body">Formation complète code + conduite, avec véhicule récent et moniteur agréé.</p>
+        <svg class="formation-arrow hidden sm:block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#lead-form" class="formation-row flex items-center gap-5 sm:gap-8 py-7 -mx-4 px-4 rounded-xl cursor-pointer">
+        <span class="formation-num font-display text-3xl sm:text-5xl font-semibold text-navy-100 leading-none shrink-0 w-12 sm:w-16">02</span>
+        <div class="flex-1">
+          <h3 class="font-semibold text-base sm:text-lg text-ink mb-1">Code de la Route</h3>
+          <p class="text-sm text-ink/55 leading-relaxed-body max-w-md">Cours en salle et série de tests en ligne illimités jusqu'à votre réussite.</p>
+        </div>
+        <svg class="formation-arrow hidden sm:block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#lead-form" class="formation-row flex items-center gap-5 sm:gap-8 py-7 -mx-4 px-4 rounded-xl cursor-pointer">
+        <span class="formation-num font-display text-3xl sm:text-5xl font-semibold text-navy-100 leading-none shrink-0 w-12 sm:w-16">03</span>
+        <div class="flex-1">
+          <h3 class="font-semibold text-base sm:text-lg text-ink mb-1">Conduite Accélérée</h3>
+          <p class="text-sm text-ink/55 leading-relaxed-body max-w-md">Pour les emplois du temps serrés : plusieurs leçons par semaine, permis en 30 jours.</p>
+        </div>
+        <svg class="formation-arrow hidden sm:block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#lead-form" class="formation-row flex items-center gap-5 sm:gap-8 py-7 -mx-4 px-4 rounded-xl cursor-pointer">
+        <span class="formation-num font-display text-3xl sm:text-5xl font-semibold text-navy-100 leading-none shrink-0 w-12 sm:w-16">04</span>
+        <div class="flex-1">
+          <h3 class="font-semibold text-base sm:text-lg text-ink mb-1">Cours de Rattrapage</h3>
+          <p class="text-sm text-ink/55 leading-relaxed-body max-w-md">Échec à l'examen ? Des séances ciblées avec un moniteur pour combler les lacunes.</p>
+        </div>
+        <svg class="formation-arrow hidden sm:block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING — entirely new section type vs. the dentist demo
+============================================================ -->
+<section id="tarifs" class="bg-cream-100 py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-lg mx-auto">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-600">Nos Formules</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Un tarif clair, sans frais cachés.</h2>
+    </div>
+
+    <div class="reveal-group grid md:grid-cols-3 gap-6 mt-12 items-start">
+      <div class="price-card bg-white rounded-2xl border border-navy-100 shadow-card p-7">
+        <h3 class="font-display font-semibold text-lg text-ink">Code Seul</h3>
+        <p class="text-sm text-ink/55 mt-1">Pour réviser et réussir l'examen théorique.</p>
+        <p class="mt-5"><span class="font-display text-4xl font-semibold text-ink">1 200</span> <span class="text-sm text-ink/55">DH</span></p>
+        <ul class="mt-6 space-y-2.5 text-sm text-ink/70">
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Accès illimité aux tests en ligne</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>10h de cours en salle</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Suivi de progression</li>
+        </ul>
+        <a href="#lead-form" class="btn-outline mt-7 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold cursor-pointer">Choisir cette formule</a>
       </div>
-      <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="w-11 h-11 rounded-xl bg-navy-50 flex items-center justify-center mb-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <h3 class="font-semibold text-ink mb-1.5">Code de la Route</h3>
-        <p class="text-sm text-ink/55 leading-relaxed-body">Cours en salle et série de tests en ligne illimités jusqu'à votre réussite.</p>
+
+      <div class="price-card is-featured relative bg-navy-900 rounded-2xl border-2 border-amber-400 shadow-float p-7">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-navy-900 text-[11px] font-bold tracking-wide uppercase px-3 py-1 rounded-full whitespace-nowrap">Plus demandé</span>
+        <h3 class="font-display font-semibold text-lg text-cream-50">Pack Complet</h3>
+        <p class="text-sm text-cream-100/60 mt-1">Code + conduite, du début à l'examen.</p>
+        <p class="mt-5"><span class="font-display text-4xl font-semibold text-cream-50">4 500</span> <span class="text-sm text-cream-100/60">DH</span></p>
+        <ul class="mt-6 space-y-2.5 text-sm text-cream-100/80">
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8A93D" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Code + 20h de conduite</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8A93D" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Véhicule récent &amp; moniteur dédié</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8A93D" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Passage à l'examen inclus</li>
+        </ul>
+        <a href="#lead-form" class="btn-primary mt-7 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold cursor-pointer">Choisir cette formule</a>
       </div>
-      <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="w-11 h-11 rounded-xl bg-navy-50 flex items-center justify-center mb-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 11-12h-7l1-8z"/></svg>
-        </div>
-        <h3 class="font-semibold text-ink mb-1.5">Conduite Accélérée</h3>
-        <p class="text-sm text-ink/55 leading-relaxed-body">Pour les emplois du temps serrés : plusieurs leçons par semaine, permis en 30 jours.</p>
-      </div>
-      <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="w-11 h-11 rounded-xl bg-navy-50 flex items-center justify-center mb-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-        </div>
-        <h3 class="font-semibold text-ink mb-1.5">Cours de Rattrapage</h3>
-        <p class="text-sm text-ink/55 leading-relaxed-body">Échec à l'examen ? Des séances ciblées avec un moniteur pour combler les lacunes.</p>
+
+      <div class="price-card bg-white rounded-2xl border border-navy-100 shadow-card p-7">
+        <h3 class="font-display font-semibold text-lg text-ink">Permis Accéléré</h3>
+        <p class="text-sm text-ink/55 mt-1">Pour obtenir le permis en un mois, garanti.</p>
+        <p class="mt-5"><span class="font-display text-4xl font-semibold text-ink">6 800</span> <span class="text-sm text-ink/55">DH</span></p>
+        <ul class="mt-6 space-y-2.5 text-sm text-ink/70">
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Tout le Pack Complet</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Leçons doubles, créneaux prioritaires</li>
+          <li class="flex items-start gap-2"><svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Permis en 30 jours garanti</li>
+        </ul>
+        <a href="#lead-form" class="btn-outline mt-7 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold cursor-pointer">Choisir cette formule</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     JOURNEY / STEPS
+     JOURNEY / STEPS — dark band for visual rhythm
 ============================================================ -->
-<section id="journey" class="bg-cream-100 py-20 md:py-28">
-  <div class="max-w-3xl mx-auto px-6 md:px-10">
+<section id="journey" class="relative overflow-hidden bg-navy-900 py-20 md:py-28">
+  <div class="absolute inset-0 asphalt-bg"></div>
+  <div class="relative max-w-3xl mx-auto px-6 md:px-10">
     <div class="text-center max-w-lg mx-auto">
-      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-600">Et après ?</span>
-      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">De l'inscription à votre permis en poche.</h2>
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-300">Et après ?</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-cream-50 mt-3">De l'inscription à votre permis en poche.</h2>
     </div>
 
     <div id="journeyTrack" class="relative mt-14">
-      <div class="absolute left-[18px] top-[18px] bottom-[18px] w-px bg-navy-200/70" aria-hidden="true"></div>
+      <div class="absolute left-[18px] top-[18px] bottom-[18px] w-px bg-white/15" aria-hidden="true"></div>
       <div id="journeyFill" class="absolute left-[18px] top-[18px] bottom-[18px] w-px bg-amber-400" aria-hidden="true"></div>
 
       <div class="reveal-group space-y-10">
         <div class="journey-step flex gap-4" data-step="1">
-          <div class="step-dot w-9 h-9 rounded-full bg-white border border-navy-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">1</div>
+          <div class="step-dot w-9 h-9 rounded-full bg-navy-800 border border-white/15 text-cream-100/40 flex items-center justify-center text-sm font-bold shrink-0">1</div>
           <div>
-            <p class="step-title font-semibold text-ink">Inscription &amp; 1ère leçon offerte</p>
-            <p class="step-desc text-sm text-ink/55 mt-1 leading-relaxed-body">Moins de deux minutes — juste votre nom, téléphone et email.</p>
+            <p class="step-title font-semibold text-cream-50">Inscription &amp; 1ère leçon offerte</p>
+            <p class="step-desc text-sm text-cream-100/60 mt-1 leading-relaxed-body">Moins de deux minutes — juste votre nom, téléphone et email.</p>
           </div>
         </div>
         <div class="journey-step flex gap-4" data-step="2">
-          <div class="step-dot w-9 h-9 rounded-full bg-white border border-navy-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">2</div>
+          <div class="step-dot w-9 h-9 rounded-full bg-navy-800 border border-white/15 text-cream-100/40 flex items-center justify-center text-sm font-bold shrink-0">2</div>
           <div>
-            <p class="step-title font-semibold text-ink">Code de la route</p>
-            <p class="step-desc text-sm text-ink/55 mt-1 leading-relaxed-body">Cours en salle et tests en ligne illimités, à votre rythme.</p>
+            <p class="step-title font-semibold text-cream-50">Code de la route</p>
+            <p class="step-desc text-sm text-cream-100/60 mt-1 leading-relaxed-body">Cours en salle et tests en ligne illimités, à votre rythme.</p>
           </div>
         </div>
         <div class="journey-step flex gap-4" data-step="3">
-          <div class="step-dot w-9 h-9 rounded-full bg-white border border-navy-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">3</div>
+          <div class="step-dot w-9 h-9 rounded-full bg-navy-800 border border-white/15 text-cream-100/40 flex items-center justify-center text-sm font-bold shrink-0">3</div>
           <div>
-            <p class="step-title font-semibold text-ink">Leçons de conduite</p>
-            <p class="step-desc text-sm text-ink/55 mt-1 leading-relaxed-body">Avec un moniteur agréé, sur un véhicule récent, à des créneaux flexibles.</p>
+            <p class="step-title font-semibold text-cream-50">Leçons de conduite</p>
+            <p class="step-desc text-sm text-cream-100/60 mt-1 leading-relaxed-body">Avec un moniteur agréé, sur un véhicule récent, à des créneaux flexibles.</p>
           </div>
         </div>
         <div class="journey-step flex gap-4" data-step="4">
-          <div class="step-dot w-9 h-9 rounded-full bg-white border border-navy-100 text-ink/40 flex items-center justify-center text-sm font-bold shrink-0">4</div>
+          <div class="step-dot w-9 h-9 rounded-full bg-navy-800 border border-white/15 text-cream-100/40 flex items-center justify-center text-sm font-bold shrink-0">4</div>
           <div>
-            <p class="step-title font-semibold text-ink">Examen &amp; permis en poche</p>
-            <p class="step-desc text-sm text-ink/55 mt-1 leading-relaxed-body">On vous accompagne le jour J. 92% de nos élèves réussissent du premier coup.</p>
+            <p class="step-title font-semibold text-cream-50">Examen &amp; permis en poche</p>
+            <p class="step-desc text-sm text-cream-100/60 mt-1 leading-relaxed-body">On vous accompagne le jour J. 92% de nos élèves réussissent du premier coup.</p>
           </div>
         </div>
       </div>
@@ -417,17 +523,12 @@
     <div class="text-center max-w-lg mx-auto">
       <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-600">Nos élèves témoignent</span>
       <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">De vrais parcours, de vrais permis.</h2>
+      <p class="text-sm text-ink/50 mt-3">4.9/5 — basé sur 140 avis</p>
     </div>
 
     <div class="reveal-group grid md:grid-cols-3 gap-5 mt-12">
       <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="flex gap-0.5 mb-3">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-        </div>
+        <svg width="22" height="16" viewBox="0 0 24 24" fill="#E8A93D" class="mb-3"><path d="M3 9c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6H3V9zm10 0c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6h-5V9z"/></svg>
         <p class="text-sm text-ink/70 leading-relaxed-body">"J'avais peur de l'examen après un échec ailleurs. Les cours de rattrapage chez Atlas m'ont vraiment remis à niveau — j'ai réussi du premier coup cette fois."</p>
         <div class="flex items-center gap-3 mt-5">
           <img src="https://placehold.co/40x40/D3E0EE/16293F?text=A" alt="" class="w-9 h-9 rounded-full object-cover">
@@ -438,13 +539,7 @@
         </div>
       </div>
       <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="flex gap-0.5 mb-3">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-        </div>
+        <svg width="22" height="16" viewBox="0 0 24 24" fill="#E8A93D" class="mb-3"><path d="M3 9c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6H3V9zm10 0c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6h-5V9z"/></svg>
         <p class="text-sm text-ink/70 leading-relaxed-body">"La formule accélérée a sauvé mon été. Entre le code en ligne et les leçons doubles, j'ai eu mon permis en un mois, juste avant de partir étudier à l'étranger."</p>
         <div class="flex items-center gap-3 mt-5">
           <img src="https://placehold.co/40x40/D3E0EE/16293F?text=L" alt="" class="w-9 h-9 rounded-full object-cover">
@@ -455,13 +550,7 @@
         </div>
       </div>
       <div class="card-hover bg-white rounded-2xl border border-navy-100 shadow-card p-6">
-        <div class="flex gap-0.5 mb-3">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A93D"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg>
-        </div>
+        <svg width="22" height="16" viewBox="0 0 24 24" fill="#E8A93D" class="mb-3"><path d="M3 9c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6H3V9zm10 0c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3v1h3v6h-5V9z"/></svg>
         <p class="text-sm text-ink/70 leading-relaxed-body">"Mon moniteur était patient même quand je calais sans arrêt au début. Trois mois plus tard, je conduis dans Casablanca sans stress."</p>
         <div class="flex items-center gap-3 mt-5">
           <img src="https://placehold.co/40x40/D3E0EE/16293F?text=Y" alt="" class="w-9 h-9 rounded-full object-cover">
@@ -476,9 +565,70 @@
 </section>
 
 <!-- ============================================================
+     FAQ — accordion, entirely new component for this page
+============================================================ -->
+<section id="faq" class="bg-cream-100 py-20 md:py-28">
+  <div class="max-w-3xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-lg mx-auto">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-amber-600">Questions Fréquentes</span>
+      <h2 class="tracking-tight-lg text-3xl md:text-4xl text-ink mt-3">Tout ce qu'il faut savoir.</h2>
+    </div>
+
+    <div class="mt-12 divide-y divide-navy-100 border-t border-b border-navy-100">
+      <div class="faq-item">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-ink">Combien de temps faut-il pour obtenir le permis ?</span>
+          <svg class="faq-chevron shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel">
+          <div class="pb-5 text-sm text-ink/60 leading-relaxed-body pr-8">En moyenne 30 jours avec notre formule accélérée, ou 2 à 3 mois avec un rythme classique de 2 à 3 leçons par semaine. Cela dépend de votre disponibilité et de votre progression.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-ink">Que se passe-t-il si j'échoue à l'examen ?</span>
+          <svg class="faq-chevron shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel">
+          <div class="pb-5 text-sm text-ink/60 leading-relaxed-body pr-8">Vous bénéficiez de séances de rattrapage ciblées avec un moniteur pour identifier et corriger les points faibles avant de repasser l'examen, sans repayer une formation complète.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-ink">Les leçons s'adaptent-elles à mon emploi du temps ?</span>
+          <svg class="faq-chevron shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel">
+          <div class="pb-5 text-sm text-ink/60 leading-relaxed-body pr-8">Oui. Nous proposons des créneaux en soirée et le week-end, et la formule accélérée permet de regrouper plusieurs leçons par semaine selon vos disponibilités.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-ink">Proposez-vous des monitrices pour les élèves qui préfèrent ?</span>
+          <svg class="faq-chevron shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel">
+          <div class="pb-5 text-sm text-ink/60 leading-relaxed-body pr-8">Oui, plusieurs de nos moniteurs sont des femmes. Précisez votre préférence par WhatsApp lors de l'inscription et nous l'organisons dès la première leçon.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-ink">Quels documents faut-il pour s'inscrire ?</span>
+          <svg class="faq-chevron shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16293F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel">
+          <div class="pb-5 text-sm text-ink/60 leading-relaxed-body pr-8">Une copie de votre CIN, 4 photos d'identité et un certificat médical (nous vous indiquons où le faire rapidement à Casablanca). On s'occupe du reste du dossier.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      FOOTER
 ============================================================ -->
 <footer class="bg-navy-900 py-12">
+  <div class="road-divider mb-12"></div>
   <div class="max-w-6xl mx-auto px-6 md:px-10">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-2.5">
@@ -556,6 +706,7 @@
     });
   })();
 
+  // ===== SCROLL REVEAL =====
   (function () {
     const groups = document.querySelectorAll('.reveal-group');
     if (!('IntersectionObserver' in window) || !groups.length) {
@@ -573,6 +724,7 @@
     groups.forEach(function (g) { observer.observe(g); });
   })();
 
+  // ===== HEADER SCROLL SHADOW =====
   (function () {
     const header = document.querySelector('header');
     if (!header) return;
@@ -581,6 +733,7 @@
     onScroll();
   })();
 
+  // ===== JOURNEY: ACTIVE STEP + FILL LINE =====
   (function () {
     const track = document.getElementById('journeyTrack');
     const fill = document.getElementById('journeyFill');
@@ -614,6 +767,51 @@
 
     steps.forEach(function (s) { observer.observe(s); });
     setActive(steps[0]);
+  })();
+
+  // ===== ANIMATED STAT COUNTERS =====
+  (function () {
+    const els = document.querySelectorAll('[data-count]');
+    if (!els.length) return;
+
+    function animate(el) {
+      const target = parseInt(el.getAttribute('data-count'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1100;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(animate);
+      return;
+    }
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // ===== FAQ ACCORDION =====
+  (function () {
+    document.querySelectorAll('.faq-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
   })();
 </script>
 
