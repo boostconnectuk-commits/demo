@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClinicPro — Sales Deck</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --navy:#0B1F33;
+  --ink:#071523;
+  --teal:#14B8A6;
+  --teal-deep:#0F766E;
+  --mint:#D1FAE5;
+  --off:#FAFAF7;
+  --grey:#8FA3B8;
+  --line:rgba(255,255,255,.12);
+  --wa:#25D366;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--ink)}
+body{font-family:'Inter',sans-serif;color:var(--off)}
+
+/* ---------- deck chrome ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--teal);width:0;z-index:50;transition:width .35s ease}
+#counter{position:fixed;top:20px;right:28px;z-index:50;font-size:12px;letter-spacing:.14em;color:var(--grey)}
+#brand{position:fixed;top:18px;left:28px;z-index:50;display:flex;align-items:center;gap:10px}
+#brand .dot{width:10px;height:10px;border-radius:3px;background:var(--teal)}
+#brand span{font-size:13px;font-weight:600;letter-spacing:.02em}
+#brand em{font-style:normal;color:var(--grey);font-weight:400;font-size:12px}
+
+#hint{position:fixed;bottom:22px;left:28px;z-index:50;font-size:11px;color:var(--grey);letter-spacing:.06em}
+#hint kbd{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:4px;padding:2px 7px;font-family:inherit;font-size:10px;margin:0 2px}
+
+.navbtn{position:fixed;top:50%;transform:translateY(-50%);z-index:50;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--off);font-size:18px;cursor:pointer;transition:background .2s,border-color .2s}
+.navbtn:hover{background:rgba(20,184,166,.15);border-color:var(--teal)}
+.navbtn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+#prev{left:20px}#next{right:20px}
+
+/* ---------- slides ---------- */
+.slide{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:96px 96px 140px;opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .45s ease,transform .45s ease,visibility .45s}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0)}
+.slide-inner{max-width:1080px;width:100%}
+
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;font-weight:600}
+h1,h2{font-family:'Fraunces',serif;font-weight:400;line-height:1.12}
+h1{font-size:clamp(38px,5.4vw,72px)}
+h2{font-size:clamp(30px,4vw,52px)}
+.sub{margin-top:22px;font-size:clamp(15px,1.4vw,19px);line-height:1.65;color:var(--grey);max-width:640px}
+.accent{color:var(--teal)}
+
+/* cover */
+.cover-tag{margin-top:44px;display:inline-block;border:1px solid var(--line);border-radius:8px;padding:10px 18px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+
+/* big statement slide */
+.statement h2 em{font-style:italic;color:var(--teal)}
+.statement .strike{position:relative;color:var(--grey)}
+.statement .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:3px;background:var(--teal);transform:rotate(-2deg)}
+
+/* problem timeline */
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.tcard{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:34px 30px;position:relative}
+.tcard .num{font-family:'Fraunces',serif;font-size:52px;color:var(--off)}
+.tcard .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-top:8px;font-weight:600}
+.tcard p{margin-top:14px;font-size:14px;line-height:1.6;color:var(--grey)}
+.tcard::before{content:attr(data-step);position:absolute;top:-12px;left:26px;background:var(--navy);border:1px solid var(--line);border-radius:999px;font-size:10px;letter-spacing:.12em;padding:4px 12px;color:var(--grey)}
+
+/* demo slide */
+.demo-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;margin-top:8px}
+.demo-frame{border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,rgba(20,184,166,.14),rgba(255,255,255,.03));aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.demo-frame .ph{font-family:'Fraunces',serif;font-size:22px;color:var(--off)}
+.demo-frame .url{font-size:12px;color:var(--teal);letter-spacing:.04em;border:1px solid rgba(20,184,166,.4);border-radius:999px;padding:6px 16px}
+.rule-list{margin-top:30px;display:flex;flex-direction:column;gap:16px}
+.rule-list div{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--grey)}
+.rule-list .tick{color:var(--teal);font-weight:600;flex:0 0 auto}
+.rule-list strong{color:var(--off);font-weight:600}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.step{border:1px solid var(--line);border-radius:16px;padding:32px 28px;background:rgba(255,255,255,.03)}
+.step .n{font-family:'Fraunces',serif;font-size:40px;color:var(--teal)}
+.step h3{font-family:'Fraunces',serif;font-weight:400;font-size:21px;margin-top:16px}
+.step p{margin-top:12px;font-size:14px;line-height:1.6;color:var(--grey)}
+
+/* commitments */
+.commit{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.ccard{border-left:2px solid var(--teal);padding:6px 0 6px 26px}
+.ccard h3{font-family:'Fraunces',serif;font-weight:400;font-size:22px;line-height:1.25}
+.ccard p{margin-top:12px;font-size:14px;line-height:1.6;color:var(--grey)}
+.no-promise{margin-top:44px;border:1px solid var(--line);border-radius:12px;padding:18px 24px;font-size:14px;color:var(--grey);display:inline-block}
+.no-promise strong{color:var(--off)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;align-items:stretch}
+.plan{border:1px solid var(--line);border-radius:18px;padding:34px 30px;background:rgba(255,255,255,.03);display:flex;flex-direction:column;position:relative}
+.plan.reco{background:var(--navy);border:2px solid var(--teal);transform:translateY(-10px)}
+.plan .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:6px 16px;border-radius:999px;white-space:nowrap}
+.plan h3{font-family:'Fraunces',serif;font-weight:400;font-size:26px}
+.plan .for{margin-top:10px;font-size:13px;line-height:1.55;color:var(--grey);min-height:62px}
+.plan .price{margin-top:22px;font-family:'Fraunces',serif;font-size:30px}
+.plan .price small{font-family:'Inter',sans-serif;font-size:12px;color:var(--grey);display:block;margin-top:4px;letter-spacing:.04em}
+.plan .price .per{font-size:16px;color:var(--grey)}
+.plan ul{list-style:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:11px}
+.plan li{font-size:13.5px;line-height:1.5;color:var(--grey);padding-left:22px;position:relative}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:600}
+.plan.reco li{color:rgba(250,250,247,.85)}
+.plan .note{margin-top:auto;padding-top:20px;font-size:11px;color:var(--grey);letter-spacing:.04em}
+
+/* guarantee */
+.gq{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.qa{border:1px solid var(--line);border-radius:14px;padding:26px 28px;background:rgba(255,255,255,.03)}
+.qa .q{font-family:'Fraunces',serif;font-size:18px;line-height:1.35}
+.qa .a{margin-top:12px;font-size:14px;line-height:1.6;color:var(--grey)}
+.qa .a strong{color:var(--teal);font-weight:600}
+
+/* close */
+.next-steps{margin-top:48px;display:flex;flex-direction:column;gap:0;max-width:680px}
+.ns{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.ns:last-child{border-bottom:none}
+.ns .k{font-family:'Fraunces',serif;font-size:22px;color:var(--teal);flex:0 0 110px}
+.ns .v{font-size:15px;line-height:1.6;color:var(--grey)}
+.ns .v strong{color:var(--off);font-weight:600}
+
+/* ---------- Darija script drawer (WhatsApp bubble) ---------- */
+#script-drawer{position:fixed;left:0;right:0;bottom:0;z-index:60;transform:translateY(105%);transition:transform .38s cubic-bezier(.2,.8,.2,1);padding:0 28px 24px;pointer-events:none}
+#script-drawer.open{transform:translateY(0);pointer-events:auto}
+.bubble-wrap{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:flex-end}
+.wa-avatar{width:38px;height:38px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:17px}
+.bubble{background:#12362E;border:1px solid rgba(37,211,102,.35);border-radius:16px 16px 16px 4px;padding:18px 22px;box-shadow:0 12px 40px rgba(0,0,0,.5);width:100%}
+.bubble .who{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--wa);font-weight:600;margin-bottom:8px}
+.bubble p{font-size:15px;line-height:1.7;color:var(--off)}
+.bubble .fr{margin-top:10px;font-size:12px;line-height:1.6;color:var(--grey);border-top:1px dashed rgba(255,255,255,.15);padding-top:10px}
+
+#script-toggle{position:fixed;bottom:22px;right:28px;z-index:70;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.45);color:var(--off);border-radius:999px;padding:10px 18px;font-size:12px;font-weight:600;letter-spacing:.06em;cursor:pointer;display:flex;gap:8px;align-items:center;font-family:'Inter',sans-serif}
+#script-toggle:hover{background:rgba(37,211,102,.22)}
+#script-toggle:focus-visible{outline:2px solid var(--wa);outline-offset:2px}
+#script-toggle .wa-dot{width:8px;height:8px;border-radius:50%;background:var(--wa)}
+
+/* dots */
+#dots{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px}
+#dots button{width:8px;height:8px;border-radius:50%;border:none;background:rgba(255,255,255,.18);cursor:pointer;padding:0}
+#dots button.on{background:var(--teal)}
+#dots button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){
+  .slide,#progress,#script-drawer{transition:none}
+}
+@media (max-width:960px){
+  .slide{padding:80px 28px 150px}
+  .timeline,.steps,.commit,.plans,.gq{grid-template-columns:1fr}
+  .demo-wrap{grid-template-columns:1fr}
+  .plan.reco{transform:none}
+  .navbtn{display:none}
+  #hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="brand"><div class="dot"></div><span>ClinicPro <em>by BoostConnect</em></span></div>
+<div id="counter">1 / 9</div>
+<div id="hint"><kbd>←</kbd><kbd>→</kbd> slides &nbsp; <kbd>S</kbd> script</div>
+
+<button class="navbtn" id="prev" aria-label="Previous slide">←</button>
+<button class="navbtn" id="next" aria-label="Next slide">→</button>
+
+<!-- ============ SLIDE 1 — COVER ============ -->
+<section class="slide" data-script="Salam docteur, chokran bzzaf 3la lwe9t dyalek. Smiti [Prénom], mn ClinicPro hna f Casablanca. Ghadi nakhod mn 3andek ghir 3echra d9aye9, w ghadi nwerrik chi 7aja concrète 3la l'cabinet dyalek — machi présentation twila."
+         data-fr="Bonjour docteur, merci beaucoup pour votre temps. Je m'appelle [Prénom], de ClinicPro ici à Casablanca. Je ne vais prendre que 10 minutes, et je vais vous montrer quelque chose de concret sur votre cabinet — pas une longue présentation.">
+  <div class="slide-inner">
+    <div class="eyebrow">Sales Deck — Internal Use</div>
+    <h1>More confirmed patients.<br>Every month. <span class="accent">On autopilot.</span></h1>
+    <p class="sub">The patient acquisition system for dental clinics in Casablanca. One page, one automated WhatsApp engine, one pipeline — sold as one system.</p>
+    <div class="cover-tag">ClinicPro &nbsp;·&nbsp; Casablanca &nbsp;·&nbsp; 2026</div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 — WHAT WE SELL ============ -->
+<section class="slide" data-script="Docteur, bach nkoun wade7 mn lowel: 7na ma kanbi3och sites web. Kanbi3o system kamel: page li katjbed les patients, WhatsApp li kayjaweb bou7do f a9al mn jouj d9aye9, w suivi 7ta l rendez-vous. L'hadaf wa7ed: 7ta talab ma ybqa ydi3 mn 3andek."
+         data-fr="Docteur, pour être clair dès le départ : nous ne vendons pas des sites web. Nous vendons un système complet : une page qui attire les patients, un WhatsApp qui répond seul en moins de 2 minutes, et un suivi jusqu'au rendez-vous. Un seul objectif : plus aucune demande perdue.">
+  <div class="slide-inner statement">
+    <div class="eyebrow">What we sell</div>
+    <h2>We don't sell <span class="strike">websites</span>.<br>We sell a system that turns strangers into <em>confirmed patients</em>.</h2>
+    <p class="sub">The page is the front door. Behind it: instant WhatsApp response, automatic reminders, and a pipeline where every single request is tracked. One system, inseparable.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 — THE PROBLEM ============ -->
+<section class="slide" data-script="Tkhayel m3aya docteur: patient kay9elleb 3lik f Google nhar l7ed f lil. Kayl9a l'cabinet dyalek, walakin ma kayn la site la moyen bach yakhod rendez-vous. Chno kaydir? Kay3eyyet l cabinet li 7dak. Hadchi kayw9e3 kola simana, w l mochkil howa annak 3emmrek ma ghadi tchofo."
+         data-fr="Imaginez avec moi docteur : un patient vous cherche sur Google un dimanche soir. Il trouve votre cabinet, mais il n'y a ni site ni moyen de prendre rendez-vous. Que fait-il ? Il appelle le cabinet d'à côté. Ça arrive chaque semaine, et le problème c'est que vous ne le voyez jamais.">
+  <div class="slide-inner">
+    <div class="eyebrow">The problem — a patient's timeline</div>
+    <h2>Every day without a system, patients call someone else.</h2>
+    <div class="timeline">
+      <div class="tcard" data-step="Tonight, 22:40">
+        <div class="num">60%</div>
+        <div class="lab">Requests never answered fast</div>
+        <p>A patient fills a form in the evening. Nobody sees it. By morning, he has booked elsewhere.</p>
+      </div>
+      <div class="tcard" data-step="One hour later">
+        <div class="num">1 hour</div>
+        <div class="lab">Before he calls another clinic</div>
+        <p>Past this window, conversion collapses. You never even know this patient existed.</p>
+      </div>
+      <div class="tcard" data-step="Next morning">
+        <div class="num">3 hours</div>
+        <div class="lab">And the lead is cold</div>
+        <p>Most clinics call back the next day. The patient already booked — or lost interest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 — THE DEMO ============ -->
+<section class="slide" data-script="Daba docteur, blast ma n3awd lik l klam, ha l page li wjjedna b smiyt l'cabinet dyalek. Rah dija online. Chof: les photos dyalek, les avis dyalek mn Google, w button dyal rendez-vous khaddam. Hadi machi maquette — jerreb b yeddek daba."
+         data-fr="Maintenant docteur, au lieu de répéter des discours, voici la page que nous avons préparée au nom de votre cabinet. Elle est déjà en ligne. Regardez : vos photos, vos avis Google, et un bouton de rendez-vous fonctionnel. Ce n'est pas une maquette — testez-la vous-même, maintenant.">
+  <div class="slide-inner">
+    <div class="eyebrow">The demo — show, don't pitch</div>
+    <h2>This is <span class="accent">your</span> clinic. Already online.</h2>
+    <div class="demo-wrap">
+      <div class="demo-frame">
+        <div class="ph">[ Open the live demo here ]</div>
+        <div class="url">demo.clinicpro.ma/cabinet-dr-[name]</div>
+      </div>
+      <div>
+        <div class="rule-list">
+          <div><span class="tick">✓</span><span><strong>Open it live, on their phone.</strong> Never show screenshots when the real thing is one tap away.</span></div>
+          <div><span class="tick">✓</span><span><strong>Let them press the booking button.</strong> The WhatsApp reply arriving in seconds is the whole pitch.</span></div>
+          <div><span class="tick">✓</span><span><strong>Then be quiet.</strong> Ask one question: "What do you think?" — and let them talk first.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 — HOW IT WORKS ============ -->
+<section class="slide" data-script="Kifach khaddam had system? Talata dyal l7wayej, sahline. Lowla: page li kat7awwel zair l talab f a9al mn minute. Taniya: WhatsApp kayjaweb automatiquement f a9al mn jouj d9aye9 — 7ta f lil, 7ta f weekend. Talta: system kayconfirmi rendez-vous, kayfekker l patient 9bel ma yji, w kaytba3 m3ah mn be3d. Nta ma katzid 7ta khedma — kolchi automatique."
+         data-fr="Comment fonctionne ce système ? Trois choses, simples. Un : une page qui transforme un visiteur en demande en moins d'une minute. Deux : WhatsApp répond automatiquement en moins de 2 minutes — même la nuit, même le week-end. Trois : le système confirme le rendez-vous, rappelle le patient avant sa venue, et le suit après. Vous n'ajoutez aucun travail — tout est automatique.">
+  <div class="slide-inner">
+    <div class="eyebrow">How the system works</div>
+    <h2>From unknown visitor to confirmed patient — automatically.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>A page that answers for you</h3>
+        <p>Built to turn a visitor into a request in under 60 seconds. Not a brochure site — a conversion machine.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>WhatsApp fires on its own</h3>
+        <p>The moment a request lands, the patient gets a professional reply. Even at 11pm on a Sunday.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Follow-up that never lets go</h3>
+        <p>Confirmation, reminder 24h before, message after the visit. No patient slips through. No forgotten appointment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 — WHAT YOU GET ============ -->
+<section class="slide" data-script="Ach ghadi takhod bdabt, docteur? Jawab f a9al mn jouj d9aye9 3la kola talab, nhar w lil. Ga3 les demandes dyalek — site, Instagram, WhatsApp — f blassa we7da. W kola chher, rapport wade7: ch7al mn talab ja, mnin ja, ch7al wella rendez-vous. Chi 7aja mohimma: 7na ma kanwe3douch b 3adad dyal les patients. 7ta wa7ed serieux ma y9der ywe3dek b hadchi. Kanwe3do b system li khaddam, b arqam li katchofhom b 3inik."
+         data-fr="Que recevez-vous exactement, docteur ? Une réponse en moins de 2 minutes à chaque demande, jour et nuit. Toutes vos demandes — site, Instagram, WhatsApp — au même endroit. Et chaque mois, un rapport clair : combien de demandes, d'où elles viennent, combien sont devenues des rendez-vous. Une chose importante : nous ne promettons pas un nombre de patients. Personne de sérieux ne peut promettre ça. Nous promettons un système qui fonctionne, avec des chiffres que vous voyez de vos propres yeux.">
+  <div class="slide-inner">
+    <div class="eyebrow">What you get — commitments, not projections</div>
+    <h2>What you get. Not what we hope.</h2>
+    <div class="commit">
+      <div class="ccard">
+        <h3>Reply in under 2 minutes</h3>
+        <p>To every request. 24/7. Automatically. It's measurable — and it's guaranteed.</p>
+      </div>
+      <div class="ccard">
+        <h3>Every request in one place</h3>
+        <p>Website, Instagram, Facebook, WhatsApp — one shared dashboard. Nothing lost between apps.</p>
+      </div>
+      <div class="ccard">
+        <h3>A monthly report that doesn't lie</h3>
+        <p>Requests received, conversion rate, cost per appointment. You know exactly what works.</p>
+      </div>
+    </div>
+    <div class="no-promise"><strong>We never promise patient counts.</strong> We promise that no request is ever lost again — and we prove it with numbers.</div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 — THE 3 PLANS ============ -->
+<section class="slide" data-script="3andna talata dyal les formules, docteur. Essentiel: khamsa alaf drham installation marra we7da, w khamsmya f chher — lik ila 3andek dija chwiya dyal visibilité w bghiti ghir ma tdi3 7ta talab. Croissance — w hadi li kanconseillew l aghlabiya dyal les cabinets — khamsa alaf installation w alfayn w khamsmya f chher, m3a la publicité Meta mgérée kamla mn 3andna. W Système Complet: khamsa alaf installation w talata alaf w khamsmya f chher — kolchi delegué, m3a agent intelligent f WhatsApp li kayakhod les rendez-vous bou7do. L'installation, docteur, b7al l acompte dyal traitement: kat-confirmi l bidaya, w l page dyalek online f seb3a iyam."
+         data-fr="Nous avons trois formules, docteur. Essentiel : 5 000 dirhams d'installation une seule fois, et 500 par mois — pour vous si vous avez déjà un peu de visibilité et que vous voulez juste ne plus perdre aucune demande. Croissance — celle que nous conseillons à la plupart des cabinets — 5 000 d'installation et 2 500 par mois, avec la publicité Meta entièrement gérée par nous. Et Système Complet : 5 000 d'installation et 3 500 par mois — tout est délégué, avec un agent intelligent sur WhatsApp qui prend les rendez-vous seul. L'installation, docteur, c'est comme l'acompte d'un traitement : elle confirme le démarrage, et votre page est en ligne en 7 jours.">
+  <div class="slide-inner">
+    <div class="eyebrow">Our plans — present the recommended one first</div>
+    <h2>Three plans. One system underneath.</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Essentiel</h3>
+        <div class="for">For clinics that already have visibility but lose the requests coming in.</div>
+        <div class="price">5 000 MAD <small>setup — one time</small></div>
+        <div class="price">500 <span class="per">MAD / month</span><small>hosting &amp; automation included</small></div>
+        <ul>
+          <li>Conversion page, live in 7 days</li>
+          <li>Instant WhatsApp auto-reply</li>
+          <li>Follow-up &amp; reminders</li>
+          <li>Shared lead log</li>
+        </ul>
+        <div class="note">The floor. Never sell the page without it.</div>
+      </div>
+      <div class="plan reco">
+        <div class="badge">Recommended for most clinics</div>
+        <h3>Croissance</h3>
+        <div class="for">For clinics that want to generate new demand on top of capturing what already comes in.</div>
+        <div class="price">5 000 MAD <small>setup — one time</small></div>
+        <div class="price">2 500 <span class="per">MAD / month</span><small>+ ad budget, paid directly to Meta</small></div>
+        <ul>
+          <li>Everything in Essentiel</li>
+          <li>Meta ad campaigns fully managed</li>
+          <li>Ad creatives included monthly</li>
+          <li>Monthly report: cost per lead &amp; conversions</li>
+        </ul>
+        <div class="note">Default pitch. Present this one first.</div>
+      </div>
+      <div class="plan">
+        <h3>Système Complet</h3>
+        <div class="for">For clinics that want everything delegated while the system works in their place.</div>
+        <div class="price">5 000 MAD <small>setup — one time</small></div>
+        <div class="price">3 500 <span class="per">MAD / month</span><small>+ ad budget, paid directly to Meta</small></div>
+        <ul>
+          <li>Everything in Croissance</li>
+          <li>AI WhatsApp agent, books 24/7</li>
+          <li>Automated post-visit sequences</li>
+          <li>Monthly strategy call</li>
+        </ul>
+        <div class="note">For delegators. Pitch only if flags say so.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 — GUARANTEE & OBJECTIONS ============ -->
+<section class="slide" data-script="Ghadi tgoul liya docteur: 'w ila ma khdemch?' Jawab sari7: l abonnement résiliable b tlatin youm préavis. Ila l system ma jab lik walo, tkhrej — bla mochkil. 7na kan7tafdo b les clients dyalna b les résultats, machi b l contrat. W ila gouliti 'bghit ghir l page bla abonnement' — nqoul lik b sara7a: l page bou7dha hiya nefs l mochkil li 3andek daba. Patient ghadi ykteb, w 7ta wa7ed ma ghadi yjawbo. L formule Essentiel, b khamsmya f chher, hiya l minimum bach l page tkoun naf3a: l hébergement, la sécurité, w l jawab automatique — kolchi dakhel fiha."
+         data-fr="Vous allez me dire docteur : 'et si ça ne marche pas ?' Réponse franche : l'abonnement est résiliable avec 30 jours de préavis. Si le système ne vous apporte rien, vous partez — sans problème. Nous gardons nos clients par les résultats, pas par le contrat. Et si vous dites 'je veux juste la page sans abonnement' — je vous le dis honnêtement : la page seule, c'est exactement le problème que vous avez aujourd'hui. Un patient écrira, et personne ne lui répondra. La formule Essentiel, à 500 par mois, c'est le minimum pour que la page serve : l'hébergement, la sécurité et la réponse automatique — tout est inclus dedans.">
+  <div class="slide-inner">
+    <div class="eyebrow">The guarantee — and the two objections you will always hear</div>
+    <h2>Honest answers close better than pressure.</h2>
+    <div class="gq">
+      <div class="qa">
+        <div class="q">"And if it doesn't work for my clinic?"</div>
+        <div class="a">The monthly plan is <strong>cancellable with 30 days notice</strong>. If the system brings you nothing, you leave. We keep clients through results, not contracts.</div>
+      </div>
+      <div class="qa">
+        <div class="q">"I just want the page, no subscription."</div>
+        <div class="a">The page alone is the exact problem you have today: a patient writes, nobody answers. <strong>Essentiel at 500 MAD/month is the floor</strong> — hosting, security and the auto-reply are inside it.</div>
+      </div>
+      <div class="qa">
+        <div class="q">"Can you guarantee me X new patients?"</div>
+        <div class="a"><strong>No — and nobody serious can.</strong> We guarantee response time, zero lost requests, and a monthly report. The rest depends on the clinic, and we say so.</div>
+      </div>
+      <div class="qa">
+        <div class="q">"I need to think / talk to my partner."</div>
+        <div class="a">Of course. <strong>The demo stays online until [date, +7 days]</strong>. After that we offer it to another clinic in the neighborhood — we take a limited number per area.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 — THE CLOSE ============ -->
+<section class="slide" data-script="Docteur, ila bdina had simana, l page dyalek tkoun online 9bel [date]. Ghadi nsift lik daba f WhatsApp récapitulatif dyal page we7da — machi contrat dyal 3echra sfa7i — m3a RIB. L virement dyal l installation kay-confirmi l bidaya, b7al l acompte dyal traitement. Wach nbdaw?"
+         data-fr="Docteur, si nous démarrons cette semaine, votre page sera en ligne avant [date]. Je vous envoie maintenant sur WhatsApp un récapitulatif d'une seule page — pas un contrat de dix pages — avec le RIB. Le virement de l'installation confirme le démarrage, comme l'acompte d'un traitement. On commence ?">
+  <div class="slide-inner">
+    <div class="eyebrow">The close — one next step, then silence</div>
+    <h2>If we start this week, your page is live in <span class="accent">7 days</span>.</h2>
+    <div class="next-steps">
+      <div class="ns"><div class="k">Now</div><div class="v"><strong>Say the price out loud. Then stop talking.</strong> The first person to speak after the price loses the frame.</div></div>
+      <div class="ns"><div class="k">+1 hour</div><div class="v">Send the <strong>one-page summary + RIB</strong> on WhatsApp. Every hour between a verbal yes and payment is a risk.</div></div>
+      <div class="ns"><div class="k">Day 7</div><div class="v"><strong>Page live.</strong> Delivered on the date promised — this is what makes month 2 payment automatic.</div></div>
+      <div class="ns"><div class="k">Day 30</div><div class="v">First report on a <strong>10-minute call</strong>, not a PDF. Then the referral ask: "Vous connaissez un confrère qui devrait voir ça ?"</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Darija script drawer ---------- -->
+<div id="script-drawer" aria-live="polite">
+  <div class="bubble-wrap">
+    <div class="wa-avatar">🗣</div>
+    <div class="bubble">
+      <div class="who">Spoken script — Darija</div>
+      <p id="script-text"></p>
+      <div class="fr" id="script-fr"></div>
+    </div>
+  </div>
+</div>
+<button id="script-toggle" aria-expanded="false"><span class="wa-dot"></span> Script (Darija) — S</button>
+
+<div id="dots" role="tablist" aria-label="Slides"></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var current=0;
+  var progress=document.getElementById('progress');
+  var counter=document.getElementById('counter');
+  var drawer=document.getElementById('script-drawer');
+  var toggle=document.getElementById('script-toggle');
+  var scriptText=document.getElementById('script-text');
+  var scriptFr=document.getElementById('script-fr');
+  var dotsWrap=document.getElementById('dots');
+  var scriptOpen=false;
+
+  slides.forEach(function(_,i){
+    var b=document.createElement('button');
+    b.setAttribute('aria-label','Go to slide '+(i+1));
+    b.addEventListener('click',function(){go(i);});
+    dotsWrap.appendChild(b);
+  });
+  var dots=[].slice.call(dotsWrap.children);
+
+  function render(){
+    slides.forEach(function(s,i){s.classList.toggle('active',i===current);});
+    dots.forEach(function(d,i){d.classList.toggle('on',i===current);});
+    progress.style.width=((current+1)/slides.length*100)+'%';
+    counter.textContent=(current+1)+' / '+slides.length;
+    scriptText.textContent=slides[current].getAttribute('data-script')||'';
+    scriptFr.textContent=slides[current].getAttribute('data-fr')||'';
+  }
+  function go(i){
+    current=Math.max(0,Math.min(slides.length-1,i));
+    render();
+  }
+  function toggleScript(force){
+    scriptOpen=(typeof force==='boolean')?force:!scriptOpen;
+    drawer.classList.toggle('open',scriptOpen);
+    toggle.setAttribute('aria-expanded',String(scriptOpen));
+  }
+
+  document.getElementById('next').addEventListener('click',function(){go(current+1);});
+  document.getElementById('prev').addEventListener('click',function(){go(current-1);});
+  toggle.addEventListener('click',function(){toggleScript();});
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(current+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(current-1);}
+    else if(e.key==='s'||e.key==='S'){toggleScript();}
+    else if(e.key==='Escape'){toggleScript(false);}
+    else if(e.key==='Home'){go(0);}
+    else if(e.key==='End'){go(slides.length-1);}
+  });
+
+  // basic swipe for tablets
+  var tx=null;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(tx===null)return;
+    var dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>60){dx<0?go(current+1):go(current-1);}
+    tx=null;
+  },{passive:true});
+
+  render();
+})();
+</script>
+</body>
+</html>
